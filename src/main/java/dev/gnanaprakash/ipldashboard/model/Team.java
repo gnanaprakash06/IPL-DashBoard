@@ -1,9 +1,12 @@
-package dev.gnanaprakash.ipldashboard.data;
+package dev.gnanaprakash.ipldashboard.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Transient;
+
+import java.util.List;
 
 @Entity
 public class Team {
@@ -14,6 +17,12 @@ public class Team {
     private String teamName;
     private long totalMatches;
     private long totalWins;
+
+    @Transient
+    private List<Match> matches;
+
+    public Team() {
+    }
 
     public Team(String teamName, long totalMatches) {
         this.teamName = teamName;
@@ -50,6 +59,14 @@ public class Team {
 
     public void setTotalWins(long totalWins) {
         this.totalWins = totalWins;
+    }
+
+    public List<Match> getMatches() {
+        return matches;
+    }
+
+    public void setMatches(List<Match> matches) {
+        this.matches = matches;
     }
 
     @Override

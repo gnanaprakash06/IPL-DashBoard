@@ -1,5 +1,6 @@
 package dev.gnanaprakash.ipldashboard.data;
 
+import dev.gnanaprakash.ipldashboard.model.Team;
 import jakarta.persistence.EntityManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
