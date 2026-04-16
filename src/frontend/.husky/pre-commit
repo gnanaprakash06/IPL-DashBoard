@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+
+# 1. To format Java backend files (Runs from root)
+echo "Formatting Java Backend..."
+./mvnw spotless:apply
+
+# To add the changes to the staging area
+git add src/main/java src/test/java
+
+# 2. To format React frontend files (Changes directory)
+echo "Formatting React Frontend..."
+cd src/frontend
+npx lint-staged

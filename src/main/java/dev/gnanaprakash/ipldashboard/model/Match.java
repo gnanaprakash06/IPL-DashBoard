@@ -2,14 +2,12 @@ package dev.gnanaprakash.ipldashboard.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-
 import java.time.LocalDate;
 
 @Entity
 public class Match {
 
-    @Id
-    private long id;
+    @Id private long id;
     private String city;
     private LocalDate date;
     private String playerOfMatch;
@@ -24,10 +22,23 @@ public class Match {
     private String umpire1;
     private String umpire2;
 
-    public Match() {
-    }
+    public Match() {}
 
-    public Match(long id, String city, LocalDate date, String playerOfMatch, String venue, String team1, String team2, String tossWinner, String tossDecision, String matchWinner, String result, String resultMargin, String umpire1, String umpire2) {
+    public Match(
+            long id,
+            String city,
+            LocalDate date,
+            String playerOfMatch,
+            String venue,
+            String team1,
+            String team2,
+            String tossWinner,
+            String tossDecision,
+            String matchWinner,
+            String result,
+            String resultMargin,
+            String umpire1,
+            String umpire2) {
         this.id = id;
         this.city = city;
         this.date = date;

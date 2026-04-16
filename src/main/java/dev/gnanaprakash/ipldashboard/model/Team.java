@@ -5,7 +5,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Transient;
-
 import java.util.List;
 
 @Entity
@@ -14,15 +13,14 @@ public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
     private String teamName;
     private long totalMatches;
     private long totalWins;
 
-    @Transient
-    private List<Match> matches;
+    @Transient private List<Match> matches;
 
-    public Team() {
-    }
+    public Team() {}
 
     public Team(String teamName, long totalMatches) {
         this.teamName = teamName;
@@ -71,10 +69,14 @@ public class Team {
 
     @Override
     public String toString() {
-        return "Team{" +
-                "teamName='" + teamName + '\'' +
-                ", totalMatches=" + totalMatches +
-                ", totalWins=" + totalWins +
-                '}';
+        return "Team{"
+                + "teamName='"
+                + teamName
+                + '\''
+                + ", totalMatches="
+                + totalMatches
+                + ", totalWins="
+                + totalWins
+                + '}';
     }
 }

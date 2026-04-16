@@ -1,6 +1,7 @@
 package dev.gnanaprakash.ipldashboard.data;
 
 import dev.gnanaprakash.ipldashboard.model.Match;
+import javax.sql.DataSource;
 import org.springframework.batch.core.job.Job;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.repository.JobRepository;
@@ -15,17 +16,32 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import javax.sql.DataSource;
-
 @Configuration
 public class BatchConfig {
 
-    private final String[] FIELD_NAMES = new String[]{
-            "id", "season", "city", "date", "match_type", "player_of_match", "venue",
-            "team1", "team2", "toss_winner", "toss_decision", "winner", "result",
-            "result_margin", "target_runs", "target_overs", "super_over", "method",
-            "umpire1", "umpire2"
-    };
+    private final String[] FIELD_NAMES =
+            new String[] {
+                "id",
+                "season",
+                "city",
+                "date",
+                "match_type",
+                "player_of_match",
+                "venue",
+                "team1",
+                "team2",
+                "toss_winner",
+                "toss_decision",
+                "winner",
+                "result",
+                "result_margin",
+                "target_runs",
+                "target_overs",
+                "super_over",
+                "method",
+                "umpire1",
+                "umpire2"
+            };
 
     @Bean
     public FlatFileItemReader<MatchInput> reader() {
@@ -46,15 +62,17 @@ public class BatchConfig {
     @Bean
     public JdbcBatchItemWriter<Match> writer(DataSource dataSource) {
         return new JdbcBatchItemWriterBuilder<Match>()
-                .sql("INSERT INTO match (id, city, date, player_of_match, venue, team1, team2, toss_winner, toss_decision, match_winner, result, result_margin, umpire1, umpire2)"
-                        + " VALUES (:id, :city, :date, :playerOfMatch, :venue, :team1, :team2, :tossWinner, :tossDecision, :matchWinner, :result, :resultMargin, :umpire1, :umpire2)")
+                .sql(
+                        "INSERT INTO match (id, city, date, player_of_match, venue, team1, team2, toss_winner, toss_decision, match_winner, result, result_margin, umpire1, umpire2)"
+                                + " VALUES (:id, :city, :date, :playerOfMatch, :venue, :team1, :team2, :tossWinner, :tossDecision, :matchWinner, :result, :resultMargin, :umpire1, :umpire2)")
                 .dataSource(dataSource)
                 .beanMapped()
                 .build();
     }
 
     @Bean
-    public Job importUserJob(JobRepository jobRepository, Step step1, JobCompletionNotificationListener listener) {
+    public Job importUserJob(
+            JobRepository jobRepository, Step step1, JobCompletionNotificationListener listener) {
         // JobBuilder ipo direct ah name and repository-ah parameter ah eduthukum
         return new JobBuilder("importUserJob", jobRepository)
                 .listener(listener)
@@ -63,8 +81,12 @@ public class BatchConfig {
     }
 
     @Bean
-    public Step step1(JobRepository jobRepository, PlatformTransactionManager transactionManager,
-                      FlatFileItemReader<MatchInput> reader, MatchDataProcessor processor, JdbcBatchItemWriter<Match> writer) {
+    public Step step1(
+            JobRepository jobRepository,
+            PlatformTransactionManager transactionManager,
+            FlatFileItemReader<MatchInput> reader,
+            MatchDataProcessor processor,
+            JdbcBatchItemWriter<Match> writer) {
         return new StepBuilder("step1", jobRepository)
                 .<MatchInput, Match>chunk(10)
                 .transactionManager(transactionManager)

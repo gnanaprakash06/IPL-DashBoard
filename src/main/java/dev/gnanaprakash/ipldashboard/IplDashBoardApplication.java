@@ -9,5 +9,4 @@ public class IplDashBoardApplication {
     public static void main(String[] args) {
         SpringApplication.run(IplDashBoardApplication.class, args);
     }
-
 }
