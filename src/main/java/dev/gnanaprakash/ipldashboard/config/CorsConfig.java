@@ -1,4 +1,3 @@
-/*
 package dev.gnanaprakash.ipldashboard.config;
 
 import org.springframework.context.annotation.Configuration;
@@ -18,4 +17,3 @@ public class CorsConfig implements WebMvcConfigurer {
                 .allowCredentials(true);
     }
 }
-*/

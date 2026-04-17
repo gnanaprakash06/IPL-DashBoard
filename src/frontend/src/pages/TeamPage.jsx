@@ -1,31 +1,35 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
 import { MatchDetailCard } from "../components/MatchDetailCard";
 import { MatchSmallCard } from "../components/MatchSmallCard";
+import { getTeamByname } from "../services/teamService";
 
 export const TeamPage = () => {
-    const [team, setTeam] = useState({});
+    const { teamName } = useParams();
 
-    useEffect(() => {
-        const fetchMatches = async () => {
-            const response = await fetch(
-                "http://localhost:8080/team/Rajasthan%20Royals"
-            );
-            const data = await response.json();
-            setTeam(data);
-        };
+    const {
+        data: team,
+        isLoading,
+        error,
+    } = useQuery({
+        queryKey: ["team", teamName],
+        queryFn: () => getTeamByname(teamName),
+    });
 
-        fetchMatches();
-    }, []);
-
-    if(!team || !team.teamName) return <h1>Loading...</h1>
+    if (isLoading) return <h1>Loading...</h1>;
+    if (error) return <h1>Error: {error.message}</h1>;
 
     return (
         <div className="TeamPage">
             <h1>{team.teamName}</h1>
 
-            <MatchDetailCard match={team.matches[0]} />
+            <MatchDetailCard teamName={team.teamName} match={team.matches[0]} />
             {team.matches.slice(1).map((match) => (
-                <MatchSmallCard key={match.id} match={match} />
+                <MatchSmallCard
+                    key={match.id}
+                    teamName={team.teamName}
+                    match={match}
+                />
             ))}
         </div>
     );
