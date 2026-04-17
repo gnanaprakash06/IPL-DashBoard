@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { MatchDetailCard } from "../components/MatchDetailCard";
 import { MatchSmallCard } from "../components/MatchSmallCard";
-import { getTeamByname } from "../services/teamService";
+import { getTeamByName } from "../services/teamService";
 
 export const TeamPage = () => {
     const { teamName } = useParams();
@@ -13,7 +13,7 @@ export const TeamPage = () => {
         error,
     } = useQuery({
         queryKey: ["team", teamName],
-        queryFn: () => getTeamByname(teamName),
+        queryFn: () => getTeamByName(teamName),
     });
 
     if (isLoading) return <h1>Loading...</h1>;

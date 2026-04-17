@@ -22,14 +22,14 @@ public class TeamController {
         this.matchRepository = matchRepository;
     }
 
-    @GetMapping("/team/{teamName}")
+    @GetMapping("/teams/{teamName}")
     public Team getTeam(@PathVariable String teamName) {
         Team team = this.teamRepository.findByTeamName(teamName);
         team.setMatches(matchRepository.findLatestMatchByTeam(teamName, 4));
         return team;
     }
 
-    @GetMapping("/team/{teamName}/matches")
+    @GetMapping("/teams/{teamName}/matches")
     public List<Match> getMatchesForTeam(@PathVariable String teamName, @RequestParam int year) {
         LocalDate startDate = LocalDate.of(year, 1, 1);
         LocalDate endDate = LocalDate.of(year + 1, 1, 1);

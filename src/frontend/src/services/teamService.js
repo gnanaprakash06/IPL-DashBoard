@@ -1,7 +1,7 @@
 import { axiosClient } from "../api/axiosClient";
 
-export const getTeamByname = async (teamName) => {
-    const response = await axiosClient.get(`/team/${teamName}`);
+export const getTeamByName = async (teamName) => {
+    const response = await axiosClient.get(`/teams/${teamName}`);
     const data = response.data;
 
     return {

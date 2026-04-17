@@ -7,7 +7,7 @@ export const MatchDetailCard = ({ teamName, match }) => {
         <div className="MatchDetailCard">
             <h3>Latest Matches</h3>
             <h1>
-                vs <Link to={`/team/${otherTeam}`}>{otherTeam}</Link>
+                vs <Link to={`/teams/${otherTeam}`}>{otherTeam}</Link>
             </h1>
             <h2>{match.date}</h2>
             <h3>at {match.venue}</h3>
