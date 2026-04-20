@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TeamController {
 
-    private TeamRepository teamRepository;
-    private MatchRepository matchRepository;
+    private final TeamRepository teamRepository;
+    private final MatchRepository matchRepository;
 
     public TeamController(TeamRepository teamRepository, MatchRepository matchRepository) {
         this.teamRepository = teamRepository;

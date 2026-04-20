@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { MatchDetailCard } from "../components/MatchDetailCard";
-import { getMatchesByYear } from "../services/getMatchesByYear";
+import { getMatchesByYear } from "../services/matchService";
 
 const MatchPage = () => {
     const { teamName, year } = useParams();

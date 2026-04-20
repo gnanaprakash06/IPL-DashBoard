@@ -11,3 +11,7 @@ git add src/main/java src/test/java
 echo "Formatting React Frontend..."
 cd src/frontend
 npx lint-staged
+
+# check for build errors
+echo "Running build check..."
+npm run build
