@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { PieChart } from "react-minimal-pie-chart";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { MatchDetailCard } from "../components/MatchDetailCard";
 import { MatchSmallCard } from "../components/MatchSmallCard";
 import { getTeamByName } from "../services/teamService";
@@ -63,7 +63,11 @@ export const TeamPage = () => {
             ))}
 
             <div className="more-link">
-                <a href="#">More {">"}</a>
+                <Link
+                    to={`/teams/${team.teamName}/matches/${import.meta.env.VITE_DATA_END_YEAR}`}
+                >
+                    More {">"}
+                </Link>
             </div>
         </div>
     );

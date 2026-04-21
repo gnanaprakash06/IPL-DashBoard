@@ -12,3 +12,10 @@ export const getTeamByName = async (teamName) => {
         matches: data.matches || [],
     };
 };
+
+export const getAllTeams = async () => {
+    const response = await axiosClient.get("/teams");
+    const data = response.data;
+
+    return data || [];
+};

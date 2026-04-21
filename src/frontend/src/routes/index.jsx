@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import AppLayout from "../layout/AppLayout";
 import { TeamPage } from "../pages/TeamPage";
 import MatchPage from "../pages/MatchPage";
+import HomePage from "../pages/HomePage";
 
 const router = createBrowserRouter([
     {
@@ -9,7 +10,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <h1>Home Page</h1>,
+                element: <HomePage />,
             },
             {
                 path: "/teams/:teamName",
