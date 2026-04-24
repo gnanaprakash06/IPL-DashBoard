@@ -23,7 +23,7 @@ const HomePage = () => {
             </div>
             <div className="team-grid">
                 {teams.map((team) => (
-                    <TeamTile teamName={team.teamName} />
+                    <TeamTile teamName={team.teamName} key={team.id} />
                 ))}
             </div>
         </div>

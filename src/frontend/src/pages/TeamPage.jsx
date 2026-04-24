@@ -10,7 +10,7 @@ export const TeamPage = () => {
     const { teamName } = useParams();
 
     const {
-        data: team,
+        data: team = [],
         isLoading,
         error,
     } = useQuery({
@@ -18,11 +18,20 @@ export const TeamPage = () => {
         queryFn: () => getTeamByName(teamName),
     });
 
+    const latestYear =
+        team.matches?.length > 0
+            ? team.matches[0].date.slice(0, 4)
+            : import.meta.env.VITE_DATE_END_YEAR;
+
     if (isLoading) return <h1>Loading...</h1>;
     if (error) return <h1>Error: {error.message}</h1>;
 
     return (
         <div className="TeamPage">
+            <Link to="/" className="home-link">
+                Home
+            </Link>
+
             <div className="team-name-section">
                 <h1 className="team-name">{team.teamName}</h1>
             </div>
@@ -63,9 +72,7 @@ export const TeamPage = () => {
             ))}
 
             <div className="more-link">
-                <Link
-                    to={`/teams/${team.teamName}/matches/${import.meta.env.VITE_DATA_END_YEAR}`}
-                >
+                <Link to={`/teams/${team.teamName}/matches/${latestYear}`}>
                     More {">"}
                 </Link>
             </div>

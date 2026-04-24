@@ -15,7 +15,10 @@ export const getTeamByName = async (teamName) => {
 
 export const getAllTeams = async () => {
     const response = await axiosClient.get("/teams");
-    const data = response.data;
+    return response.data || [];
+};
 
-    return data || [];
+export const getPlayedYears = async (teamName) => {
+    const response = await axiosClient.get(`/teams/${teamName}/years`);
+    return response.data || [];
 };

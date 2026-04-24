@@ -41,4 +41,10 @@ public class TeamController {
 
         return this.matchRepository.getMatchesByTeamBetweenDates(teamName, startDate, endDate);
     }
+
+    @GetMapping("/teams/{teamName}/years")
+    public List<Integer> getPlayedYears(@PathVariable String teamName) {
+        List<Integer> playedYears = this.matchRepository.getPlayedYears(teamName);
+        return playedYears;
+    }
 }

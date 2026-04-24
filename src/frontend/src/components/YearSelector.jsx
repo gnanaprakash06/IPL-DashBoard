@@ -1,21 +1,28 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./YearSelector.scss";
+import { useQuery } from "@tanstack/react-query";
+import { getPlayedYears } from "../services/teamService";
 
 const YearSelector = ({ teamName }) => {
-    let years = [];
+    const { year: selectedYear } = useParams();
 
-    const startYear = import.meta.env.VITE_DATA_START_YEAR;
-    const endYear = import.meta.env.VITE_DATA_END_YEAR;
+    const { data: years = [], isLoading } = useQuery({
+        queryKey: ["playedYears", teamName],
+        queryFn: () => getPlayedYears(teamName),
+    });
 
-    for (let i = startYear; i <= endYear; i++) {
-        years.push(i);
-    }
+    if (isLoading) return <div className="YearSelector">Loading...</div>;
 
     return (
         <ol className="YearSelector">
             {years.map((year) => (
                 <li key={year}>
-                    <Link to={`/teams/${teamName}/matches/${year}`}>
+                    <Link
+                        to={`/teams/${teamName}/matches/${year}`}
+                        className={
+                            year === parseInt(selectedYear) ? "active" : ""
+                        }
+                    >
                         {year}
                     </Link>
                 </li>

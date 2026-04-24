@@ -22,6 +22,10 @@ public interface MatchRepository extends CrudRepository<Match, Long> {
             @Param("dateStart") LocalDate startDate,
             @Param("dateEnd") LocalDate endDate);
 
+    @Query(
+            "SELECT DISTINCT YEAR(m.date) FROM Match m WHERE m.team1 = :teamName OR m.team2 = :teamName ORDER BY YEAR(m.date) DESC")
+    List<Integer> getPlayedYears(@Param("teamName") String teamName);
+
     //    List<Match> getByTeam1AndDateBetweenOrTeam2AndDateBetweenOrderByDateDesc(String teamName1,
     // LocalDate date1, LocalDate date2, String teamName2, LocalDate date3, LocalDate date4);
 

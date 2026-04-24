@@ -5,10 +5,29 @@
     column-gap: 10px;
     row-gap: 10px;
 
+    position: relative;
+
     .team-name-section {
         grid-column: span 3;
         justify-self: start;
         align-self: end;
+    }
+
+    .home-link {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        background-color: rgba(255, 255, 255, 0.1);
+        padding: 8px 16px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background-color: #aa3bff;
+            color: white;
+        }
     }
 
     .team-name {
@@ -30,5 +49,9 @@
         align-self: center;
         justify-self: center;
         font-size: 1.5rem;
+
+        &:hover {
+            font-weight: bold;
+        }
     }
 }

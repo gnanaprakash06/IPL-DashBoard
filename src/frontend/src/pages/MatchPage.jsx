@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { MatchDetailCard } from "../components/MatchDetailCard";
 import { getMatchesByYear } from "../services/matchService";
 import "./MatchPage.scss";
@@ -22,6 +22,9 @@ const MatchPage = () => {
 
     return (
         <div className="MatchPage">
+            <Link to="/" className="home-link">
+                Home
+            </Link>
             <div className="year-selector">
                 <h3>Select Year</h3>
                 <YearSelector teamName={teamName} />
@@ -30,7 +33,8 @@ const MatchPage = () => {
                 <h1 className="page-heading">
                     {teamName} matches in {year}
                 </h1>
-                {matches?.map((match) => (
+
+                {matches.map((match) => (
                     <MatchDetailCard
                         key={match.id}
                         teamName={teamName}

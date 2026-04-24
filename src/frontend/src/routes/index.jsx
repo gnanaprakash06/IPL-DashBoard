@@ -1,10 +1,10 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createHashRouter } from "react-router-dom";
 import AppLayout from "../layout/AppLayout";
-import { TeamPage } from "../pages/TeamPage";
-import MatchPage from "../pages/MatchPage";
 import HomePage from "../pages/HomePage";
+import MatchPage from "../pages/MatchPage";
+import { TeamPage } from "../pages/TeamPage";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
     {
         element: <AppLayout />,
         children: [
